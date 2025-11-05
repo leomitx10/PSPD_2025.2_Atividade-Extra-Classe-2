@@ -17,4 +17,9 @@
         <name>dfs.namenode.http-address</name>
         <value>hadoop-master:9870</value>
     </property>
+    <property>
+        <name>dfs.blocksize</name>
+        <value>67108864</value>
+        <description>64 MB - Aumenta paralelismo para arquivos menores</description>
+    </property>
 </configuration>
