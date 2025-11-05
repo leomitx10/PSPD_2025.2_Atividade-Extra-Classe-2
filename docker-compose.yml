@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  hadoop-master:
+    build: .
+    container_name: hadoop-master
+    hostname: hadoop-master
+    ports:
+      - "9870:9870"  
+      - "8088:8088"  
+      - "9000:9000"  
+    environment:
+      - HDFS_NAMENODE_USER=root
+      - HDFS_DATANODE_USER=root
+      - HDFS_SECONDARYNAMENODE_USER=root
+      - YARN_RESOURCEMANAGER_USER=root
+      - YARN_NODEMANAGER_USER=root
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    volumes:
+      - ./scripts/start-master.sh:/start.sh
+      - hadoop-master-data:/hadoop
+    command: bash -c "chmod +x /start.sh && /start.sh"
+    networks:
+      - hadoop-network
+
+  hadoop-slave1:
+    build: .
+    container_name: hadoop-slave1
+    hostname: hadoop-slave1
+    depends_on:
+      - hadoop-master
+    environment:
+      - HDFS_NAMENODE_USER=root
+      - HDFS_DATANODE_USER=root
+      - HDFS_SECONDARYNAMENODE_USER=root
+      - YARN_RESOURCEMANAGER_USER=root
+      - YARN_NODEMANAGER_USER=root
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    volumes:
+      - ./scripts/start-slave.sh:/start.sh
+      - hadoop-slave1-data:/hadoop
+    command: bash -c "chmod +x /start.sh && /start.sh"
+    networks:
+      - hadoop-network
+
+  hadoop-slave2:
+    build: .
+    container_name: hadoop-slave2
+    hostname: hadoop-slave2
+    depends_on:
+      - hadoop-master
+    environment:
+      - HDFS_NAMENODE_USER=root
+      - HDFS_DATANODE_USER=root
+      - HDFS_SECONDARYNAMENODE_USER=root
+      - YARN_RESOURCEMANAGER_USER=root
+      - YARN_NODEMANAGER_USER=root
+      - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    volumes:
+      - ./scripts/start-slave.sh:/start.sh
+      - hadoop-slave2-data:/hadoop
+    command: bash -c "chmod +x /start.sh && /start.sh"
+    networks:
+      - hadoop-network
+
+networks:
+  hadoop-network:
+    driver: bridge
+
+volumes:
+  hadoop-master-data:
+  hadoop-slave1-data:
+  hadoop-slave2-data:
