@@ -56,7 +56,7 @@ echo ""
 START_TIME=$(date +%s)
 
 docker exec hadoop-master hadoop jar \
-    $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar \
+    /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar \
     wordcount \
     /user/root/wordcount_input \
     /user/root/wordcount_output

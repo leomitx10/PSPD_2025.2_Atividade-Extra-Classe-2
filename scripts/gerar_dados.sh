@@ -39,15 +39,15 @@ echo "Gerando arquivos de texto..."
 echo "Isso pode levar alguns minutos..."
 echo ""
 
-for arquivo_num in {1..10}; do
+for arquivo_num in {1..3}; do
     arquivo="/tmp/hadoop_input/livro_${arquivo_num}.txt"
-    echo "Gerando arquivo ${arquivo_num}/10: ${arquivo}"
+    echo "Gerando arquivo ${arquivo_num}/3: ${arquivo}"
     
-    for ((linha=1; linha<=500000; linha++)); do
+    for ((linha=1; linha<=25000; linha++)); do
         gerar_linha >> "$arquivo"
         
-        if [ $((linha % 50000)) -eq 0 ]; then
-            echo "  Progresso: ${linha}/500000 linhas"
+        if [ $((linha % 5000)) -eq 0 ]; then
+            echo "  Progresso: ${linha}/25000 linhas"
         fi
     done
     
