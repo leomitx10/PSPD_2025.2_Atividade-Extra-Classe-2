@@ -16,7 +16,7 @@ gera_linhas() {
     done
 }
 
-for i in {1..2}; do
+for i in {1..70}; do
     echo "Gerando arquivo $i..."
     gera_linhas 1000000 > "/tmp/hadoop_input/livro_${i}.txt"
 done
