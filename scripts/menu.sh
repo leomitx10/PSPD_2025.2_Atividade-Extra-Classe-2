@@ -36,37 +36,37 @@ executar_opcao() {
     case $1 in
         1)
             echo ""
-            echo "🔧 Gerando dados..."
+            echo "Gerando dados..."
             ./gerar_dados.sh
             ;;
         2)
             echo ""
-            echo "🚀 Executando wordcount único..."
+            echo "Executando wordcount único..."
             ./executar_wordcount.sh
             ;;
         3)
             echo ""
             read -p "Quantos jobs simultâneos? (padrão: 3): " num_jobs
             num_jobs=${num_jobs:-3}
-            echo "🚀 Executando $num_jobs wordcounts simultâneos..."
+            echo "Executando $num_jobs wordcounts simultâneos..."
             ./executar_multiplos_wordcount.sh $num_jobs
             ;;
         4)
             echo ""
-            echo "📊 Monitorando cluster (snapshot)..."
+            echo "Monitorando cluster (snapshot)..."
             ./monitorar_jobs.sh
             ;;
         5)
             echo ""
             read -p "Intervalo de atualização em segundos (padrão: 5): " intervalo
             intervalo=${intervalo:-5}
-            echo "📊 Monitorando cluster continuamente..."
+            echo "Monitorando cluster continuamente..."
             echo "Pressione Ctrl+C para parar"
             ./monitorar_jobs.sh -c $intervalo
             ;;
         6)
             echo ""
-            echo "📈 Iniciando teste de performance..."
+            echo "Iniciando teste de performance..."
             echo "Este teste levará aproximadamente 15-20 minutos"
             read -p "Continuar? (s/n): " confirma
             if [ "$confirma" == "s" ]; then
@@ -77,7 +77,7 @@ executar_opcao() {
             ;;
         7)
             echo ""
-            echo "🔥 Iniciando teste de resiliência..."
+            echo "Iniciando teste de resiliência..."
             echo "Este teste levará aproximadamente 20-30 minutos"
             read -p "Continuar? (s/n): " confirma
             if [ "$confirma" == "s" ]; then
@@ -88,19 +88,19 @@ executar_opcao() {
             ;;
         8)
             echo ""
-            echo "💥 Abrindo simulador de falhas..."
+            echo "Abrindo simulador de falhas..."
             ./simular_falhas.sh
             ;;
         9)
             echo ""
-            echo "🚀 Iniciando cluster..."
+            echo "Iniciando cluster..."
             cd ..
             docker-compose up -d
             echo ""
-            echo "⏰ Aguardando serviços iniciarem (30s)..."
+            echo "Aguardando serviços iniciarem (30s)..."
             sleep 30
             echo ""
-            echo "✅ Cluster iniciado!"
+            echo "Cluster iniciado!"
             echo "Interfaces disponíveis:"
             echo "  ResourceManager: http://localhost:8088"
             echo "  NameNode: http://localhost:9870"
@@ -108,25 +108,25 @@ executar_opcao() {
             ;;
         10)
             echo ""
-            echo "🛑 Parando cluster..."
+            echo "Parando cluster..."
             cd ..
             docker-compose down
             cd scripts
-            echo "✅ Cluster parado!"
+            echo "Cluster parado!"
             ;;
         11)
             echo ""
-            echo "🔄 Reiniciando cluster..."
+            echo "Reiniciando cluster..."
             cd ..
             docker-compose restart
-            echo "⏰ Aguardando serviços iniciarem (30s)..."
+            echo "Aguardando serviços iniciarem (30s)..."
             sleep 30
-            echo "✅ Cluster reiniciado!"
+            echo "Cluster reiniciado!"
             cd scripts
             ;;
         12)
             echo ""
-            echo "📋 Logs do cluster:"
+            echo "Logs do cluster:"
             echo ""
             echo "Escolha um container:"
             echo "  1) hadoop-master"
@@ -157,14 +157,14 @@ executar_opcao() {
             exit 0
             ;;
         *)
-            echo "❌ Opção inválida!"
+            echo "ERRO: Opção inválida!"
             ;;
     esac
 }
 
 # Verificar se estamos no diretório correto
 if [ ! -f "executar_wordcount.sh" ]; then
-    echo "❌ ERRO: Execute este script de dentro do diretório scripts/"
+    echo "ERRO: Execute este script de dentro do diretório scripts/"
     exit 1
 fi
 

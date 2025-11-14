@@ -50,7 +50,7 @@ echo ""
 declare -a PIDS
 
 for i in $(seq 1 $NUM_JOBS); do
-    echo "🚀 Iniciando Job $i de $NUM_JOBS..."
+    echo "Iniciando Job $i de $NUM_JOBS..."
     
     docker exec hadoop-master hdfs dfs -rm -r -f /user/root/wordcount_output_${i} 2>/dev/null
     
@@ -81,7 +81,7 @@ echo ""
 START_TIME=$(date +%s)
 
 for i in $(seq 1 $NUM_JOBS); do
-    echo "⏳ Aguardando Job $i (PID: ${PIDS[$i]})..."
+    echo "Aguardando Job $i (PID: ${PIDS[$i]})..."
     wait ${PIDS[$i]}
     EXIT_CODE=$?
     
