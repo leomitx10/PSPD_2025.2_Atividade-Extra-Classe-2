@@ -92,12 +92,12 @@ echo "Tempo total do script: ${TOTAL_MIN}m ${TOTAL_SEC}s"
 echo -e "\nVerificando resultado..."
 docker exec hadoop-master hdfs dfs -ls /user/root/wordcount_output/
 
-echo -e "\nTop 20 palavras:"
+echo -e "\nTop 10 palavras:"
 docker exec hadoop-master bash -c '
     hdfs dfs -cat /user/root/wordcount_output/part-r-* |
     awk "{print \$2,\$1}" |
     sort -rn |
-    head -20 |
+    head -10 |
     awk "{print \$2,\$1}"
 '
 
