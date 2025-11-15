@@ -26,9 +26,9 @@ gera_linhas() {
 }
 
 # Se quiser gerar o equivalente aos 70 arquivos, multiplique o total de linhas por 70
-TOTAL_LINHAS=$((1000000 * 80))
+TOTAL_LINHAS=$((1000000))
 
-echo "Gerando massa de dados única (~70 arquivos em 1)..."
+echo "Gerando massa de dados única..."
 
 # Gera e adiciona ao arquivo final
 gera_linhas "$TOTAL_LINHAS" >> "$OUTPUT"
