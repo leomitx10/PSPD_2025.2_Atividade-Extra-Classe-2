@@ -19,6 +19,7 @@ services:
     volumes:
       - ./scripts/start-master.sh:/start.sh
       - hadoop-master-data:/hadoop
+      - ./massa_de_dados:/massa_de_dados
     command: bash -c "chmod +x /start.sh && /start.sh"
     networks:
       - hadoop-network
