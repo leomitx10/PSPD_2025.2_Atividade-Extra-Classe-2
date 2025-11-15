@@ -11,22 +11,22 @@
     </property>
     <property>
         <name>yarn.nodemanager.resource.memory-mb</name>
-        <value>4096</value>
-        <description>4 GB - Permite mais containers simultâneos</description>
+        <value>8192</value>
+        <description>8 GB - Padrão</description>
     </property>
     <property>
         <name>yarn.nodemanager.resource.cpu-vcores</name>
-        <value>4</value>
-        <description>4 cores - Melhora paralelismo</description>
+        <value>8</value>
+        <description>8 cores - Padrão</description>
     </property>
     <property>
         <name>yarn.scheduler.minimum-allocation-mb</name>
-        <value>512</value>
-        <description>Alocação mínima de memória por container</description>
+        <value>1024</value>
+        <description>Alocação mínima de memória por container - Padrão</description>
     </property>
     <property>
         <name>yarn.scheduler.maximum-allocation-mb</name>
-        <value>4096</value>
-        <description>Alocação máxima de memória por container</description>
+        <value>8192</value>
+        <description>Alocação máxima de memória por container - Padrão</description>
     </property>
 </configuration>
