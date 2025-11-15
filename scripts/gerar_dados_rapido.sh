@@ -25,12 +25,19 @@ gera_linhas() {
     done
 }
 
-# Se quiser gerar o equivalente aos 70 arquivos, multiplique o total de linhas por 70
-TOTAL_LINHAS=$((1000000 * 80))
+# Versão mais rápida: 30 arquivos equivalentes ao invés de 80
+# Isso mantém o job rodando por tempo suficiente (2-3 min) para os testes
+TOTAL_LINHAS=$((1000000 * 30))
 
-echo "Gerando massa de dados única (~70 arquivos em 1)..."
+echo "Gerando massa de dados rápida para testes (~30 arquivos equivalentes)..."
+echo "Tempo estimado: 30-60 segundos"
 
 # Gera e adiciona ao arquivo final
 gera_linhas "$TOTAL_LINHAS" >> "$OUTPUT"
 
-echo "Arquivo gerado em: $OUTPUT"
+TAMANHO=$(du -h "$OUTPUT" | cut -f1)
+echo "✅ Arquivo gerado em: $OUTPUT"
+echo "📦 Tamanho: $TAMANHO"
+echo ""
+echo "⚡ Essa versão é mais rápida mas mantém os jobs com duração razoável para testes"
+echo "💡 Para testes de performance completos, use: ./gerar_dados.sh"

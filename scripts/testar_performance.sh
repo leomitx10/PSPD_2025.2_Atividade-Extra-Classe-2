@@ -24,20 +24,23 @@ executar_teste() {
     log "Nodes ativos: $NODES_ATIVOS"
     log "=========================================="
     
+    # Garantir que todos os nodes estão rodando
     docker start hadoop-master hadoop-slave1 hadoop-slave2 >/dev/null 2>&1
-    sleep 10
+    sleep 5  # Reduzido de 10 para 5
     
+    # Parar nodes conforme necessário
     if [ "$NODES_ATIVOS" == "1" ]; then
         docker stop hadoop-slave1 hadoop-slave2 >/dev/null 2>&1
-        sleep 5
+        sleep 3  # Reduzido de 5 para 3
     elif [ "$NODES_ATIVOS" == "2" ]; then
         docker stop hadoop-slave2 >/dev/null 2>&1
-        sleep 5
+        sleep 3  # Reduzido de 5 para 3
     fi
     
     log "Status do cluster:"
     docker ps --filter "name=hadoop" --format "table {{.Names}}\t{{.Status}}" | tee -a "$LOG_FILE"
     
+    # Limpar apenas o diretório de saída deste teste
     docker exec hadoop-master hdfs dfs -rm -r -f /user/root/wordcount_output_perf_${NODES_ATIVOS}nodes >/dev/null 2>&1
     
     log ""
@@ -73,8 +76,8 @@ executar_teste() {
         echo "${NODES_ATIVOS},${DURATION},FALHA,0,0" >> "$LOG_DIR/resultados.csv"
     fi
     
-    log "Aguardando 20s antes do próximo teste..."
-    sleep 20
+    log "Aguardando 10s antes do próximo teste..."  # Reduzido de 20 para 10
+    sleep 10
 }
 
 log "Verificando cluster..."
@@ -86,6 +89,7 @@ fi
 log "Verificando dados no HDFS..."
 if ! docker exec hadoop-master hdfs dfs -test -d /user/root/wordcount_input >/dev/null 2>&1; then
     log "ERRO: Dados não encontrados no HDFS."
+    log "Execute: ./executar_wordcount.sh para enviar os dados ao HDFS"
     exit 1
 fi
 
@@ -106,9 +110,7 @@ executar_teste "1" "Teste com 1 node"
 log ""
 log "Restaurando todos os nodes..."
 docker start hadoop-master hadoop-slave1 hadoop-slave2 >/dev/null 2>&1
-sleep 10
-
-executar_teste "3" "Teste final com 3 nodes"
+sleep 5  # Reduzido de 10 para 5
 
 log ""
 log "=========================================="
