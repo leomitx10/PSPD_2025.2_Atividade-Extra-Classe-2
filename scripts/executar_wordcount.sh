@@ -93,11 +93,14 @@ echo -e "\nVerificando resultado..."
 docker exec hadoop-master hdfs dfs -ls /user/root/wordcount_output/
 
 echo -e "\nTop 20 palavras:"
-docker exec hadoop-master bash -c "
-    hdfs dfs -cat /user/root/wordcount_output/part-r-00000 |
-    sort -t\$'\t' -k2 -nr | head -20
-"
+docker exec hadoop-master bash -c '
+    hdfs dfs -cat /user/root/wordcount_output/part-r-* |
+    awk "{print \$2,\$1}" |
+    sort -rn |
+    head -20 |
+    awk "{print \$2,\$1}"
+'
 
 echo -e "\nPara ver o resultado completo:"
-echo "  docker exec hadoop-master hdfs dfs -cat /user/root/wordcount_output/part-r-00000"
+echo "  docker exec hadoop-master hdfs dfs -cat /user/root/wordcount_output/part-r-*"
 echo ""
