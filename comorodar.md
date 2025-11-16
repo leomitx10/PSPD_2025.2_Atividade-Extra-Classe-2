@@ -82,5 +82,3 @@ docker-compose down
 ```
 
 ---
-
-**Pronto! O cluster Hadoop estará rodando e pronto para testes.**
