@@ -17,4 +17,9 @@
         <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
         <value>false</value>
     </property>
+    <property>
+        <name>dfs.blocksize</name>
+        <value>33554432</value>
+        <description>Blocksize = 32 MB: Mais tasks Map, maior paralelismo</description>
+    </property>
 </configuration>

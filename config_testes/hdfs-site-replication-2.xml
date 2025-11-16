@@ -4,6 +4,7 @@
     <property>
         <name>dfs.replication</name>
         <value>2</value>
+        <description>Replicação = 2 (PADRÃO): Balanceamento entre confiabilidade e espaço</description>
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>

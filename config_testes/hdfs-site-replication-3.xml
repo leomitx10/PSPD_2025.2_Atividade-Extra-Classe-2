@@ -3,7 +3,8 @@
 <configuration>
     <property>
         <name>dfs.replication</name>
-        <value>2</value>
+        <value>3</value>
+        <description>Replicação = 3: Máxima confiabilidade e leitura paralela, maior consumo de disco</description>
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>

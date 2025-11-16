@@ -3,7 +3,8 @@
 <configuration>
     <property>
         <name>dfs.replication</name>
-        <value>2</value>
+        <value>1</value>
+        <description>Replicação = 1: Economiza espaço mas SEM tolerância a falhas</description>
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>

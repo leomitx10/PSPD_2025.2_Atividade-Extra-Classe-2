@@ -17,4 +17,9 @@
         <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
         <value>false</value>
     </property>
+    <property>
+        <name>dfs.blocksize</name>
+        <value>67108864</value>
+        <description>Blocksize = 64 MB (PADRÃO): Balanceamento entre paralelismo e overhead</description>
+    </property>
 </configuration>

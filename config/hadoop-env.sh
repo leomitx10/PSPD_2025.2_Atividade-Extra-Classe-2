@@ -12,16 +12,7 @@ for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
   fi
 done
 
-export HADOOP_HEAPSIZE_MAX=1024
-
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
-
-export HDFS_NAMENODE_OPTS="-Dhadoop.security.logger=INFO,RFAS"
-export HDFS_DATANODE_OPTS="-Dhadoop.security.logger=ERROR,RFAS"
-export HDFS_SECONDARYNAMENODE_OPTS="-Dhadoop.security.logger=INFO,RFAS"
-
-export YARN_RESOURCEMANAGER_OPTS="-Dhadoop.security.logger=INFO,RFAS"
-export YARN_NODEMANAGER_OPTS="-Dhadoop.security.logger=INFO,RFAS"
 
 export HDFS_NAMENODE_USER=root
 export HDFS_DATANODE_USER=root
