@@ -79,17 +79,40 @@ Veja o arquivo [`comorodar.md`](comorodar.md) para instruções detalhadas. Resu
 - `config/`: Arquivos de configuração do Hadoop (core-site.xml, hdfs-site.xml, etc).
 - `config_testes/`: Configurações alternativas para experimentos (blocksize, replicação, memória, vcores).
 
+## Como Rodar os Testes de Configuração
+
+O projeto inclui diversos scripts para testar e analisar o comportamento do Hadoop em diferentes cenários. Todos estão no diretório `scripts/` e podem ser executados de dentro do container master ou do host (caso o Docker esteja rodando).
+
+### Exemplos de execução:
+
+```bash
+# Execute dentro da pasta do projeto (no host ou dentro do container master)
+cd scripts
+./testar_blocksize.sh           # Testa diferentes tamanhos de bloco do HDFS
+./testar_memoria_nm.sh          # Testa diferentes quantidades de memória para NodeManagers
+./testar_memoria_tasks.sh       # Testa diferentes quantidades de memória para tasks Map/Reduce
+./testar_replicacao.sh          # Testa diferentes fatores de replicação do HDFS
+./testar_tolerancia_falhas.sh   # Testa tolerância a falhas (DataNodes)
+./testar_vcores_nm.sh           # Testa diferentes quantidades de vCores por NodeManager
+```
+
+### O que cada script faz:
+
+- **testar_blocksize.sh**: Avalia o impacto do tamanho de bloco do HDFS na performance do WordCount.
+- **testar_memoria_nm.sh**: Mede o efeito de diferentes quantidades de memória disponíveis para NodeManagers.
+- **testar_memoria_tasks.sh**: Analisa o impacto da memória alocada para tasks Map/Reduce.
+- **testar_replicacao.sh**: Testa o desempenho e uso de espaço com diferentes fatores de replicação.
+- **testar_tolerancia_falhas.sh**: Simula falhas de DataNodes durante a execução do WordCount para avaliar a tolerância a falhas do cluster.
+- **testar_vcores_nm.sh**: Avalia o efeito de diferentes quantidades de vCores por NodeManager no desempenho do processamento.
+
+Os resultados de cada teste são exibidos ao final da execução de cada script, facilitando a análise comparativa.
+
 ## Resultados e Monitoramento
 
 - Acompanhe o progresso e resultados via:
   - ResourceManager UI: http://localhost:8088
   - NameNode UI:        http://localhost:9870
 - Saída do WordCount disponível no HDFS em `/user/root/wordcount_output`.
-
-## Observações
-
-- O projeto é totalmente automatizado para facilitar testes e experimentos didáticos.
-- Para alterar parâmetros do Hadoop, utilize os arquivos em `config_testes/` e reinicie o cluster.
 
 ---
 
